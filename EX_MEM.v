@@ -1,6 +1,6 @@
-`timescale ns/ns
+`timescale 1ns/1ns
 
-module EX_MEM (input [1:0] WB, M, input [31:0] ALU_OUT, ALU_C, input [4:0] writeReg
+module EX_MEM (input clk, rst, input [1:0] WB, M, input [31:0] ALU_OUT, ALU_C, input [4:0] writeReg
                output [1:0] MEM_WB, MEM_M, output [31:0] MEM_ALU_out, DM_Wdata, output [4:0] MEM_writeReg);
 
   always @(posedge clk, posedge rst) begin
