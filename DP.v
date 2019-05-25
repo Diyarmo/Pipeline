@@ -7,7 +7,7 @@ module DP(input clk, rst, pcSrc, pcWrite, memRead, memWrite, ifidWrite, regDst,
 wire [31:0] PC_in, PC_out, jumpAdd, new_PC, INS_out;
 assign new_PC = PC_out + 4;
 PC pc(PC_in, PC_out, clk, rst, pcWrite);
-INS_MEM im(PC_out, INS_out);
+INSTRUCTION_MEMORY im(PC_out, INS_out);
 
 IF_ID ifid(ifidWrite, ifidFlush, INS_out, new_PC, IFID_INS, IFID_PC);
 
