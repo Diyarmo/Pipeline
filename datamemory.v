@@ -5,13 +5,13 @@ module DATA_MEMORY(
     output reg [31:0] Out
 );
 
-    reg [31:0] Mem [0:16383];
+    reg [31:0] mem [10239:0];
 
-    always @(negedge clk) if(MemRead) Out <= Mem[Address];
-
+    always @(negedge clk) if(MemRead) Out <= mem[Address];
+    integer i;
     always @(posedge clk, posedge rst) begin
-        if(rst) Mem <= 524288'b0;
-        else if(MemWrite) Mem[Address] <= WriteVal;
+        if(rst) for(i=0; i<10240; i=i+1) mem[i] <= 32'b0;
+        else if(MemWrite) mem[Address] <= WriteVal;
     end
 
 endmodule
