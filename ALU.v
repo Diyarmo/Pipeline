@@ -8,7 +8,7 @@ module ALU (input [31:0] A, B, input [2:0] ALUop, output reg [31:0] OUT);
       SUB: OUT = A - B;
       AND: OUT = A & B;
       OR : OUT = A | B;
-      SLT: OUT = (A == B);
+      SLT: OUT = (A < B);
     endcase
   end
 endmodule
