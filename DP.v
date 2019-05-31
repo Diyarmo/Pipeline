@@ -43,7 +43,7 @@ assign ALU_C = (forwardB==2)?MEM_ALU_out:(forwardB==1)?WB_DM_out:(forwardB==0)?E
 assign ALU_B = (EX_E[4]==1 )?EX_SE:(EX_E[4]==0)?ALU_C:32'bz;
 wire [31:0] ALU_OUT;
 ALU alu(ALU_A, ALU_B, EX_E[3:1], ALU_OUT);
-assign EX_writeReg = (regDst==1)?IDEX_rd:(regDst==0)?IDEX_rt:5'bz;
+assign EX_writeReg = (regDst==1)?EX_rd:(regDst==0)?EX_rt:5'bz;
 
 
 wire [1:0] MEM_M;
