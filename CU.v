@@ -3,7 +3,8 @@
 module CU(input clk, rst, output reg pcSrc, pcWrite, memRead, memWrite, ifidWrite, regDst,
           output reg [2:0] ALUop, output reg ALUsrc, output reg [1:0]forwardA, forwardB,
           output reg regWrite, stall_needed, ifidFlush, memToReg, jORb,
-          input regs_equal, input [31:0] INS,input [4:0] EX_rs, EX_rt, MEM_writeReg, WB_writeReg, input [1:0] MEM_W, WB_W, EX_M);
+          input regs_equal, input [31:0] INS,input [4:0] EX_rs, EX_rt, MEM_writeReg, WB_writeReg,
+          input [1:0] MEM_W, WB_W, EX_M);
 
 
 parameter R_TYPE = 6'b0, LW = 6'b100011, SW = 6'b101011, J = 6'b000010, BEQ = 6'b000100, BNE = 6'b000101;
@@ -65,7 +66,7 @@ always @ ( posedge clk ) begin
 end
 
 always @ ( posedge clk ) begin
-  {pcWrite, ifidWrite, stall_needed} <= (EX_M[0] && (EX_rt ==ID_INS[25:21] || EX_rt == ID_INS[20:16]))?3'b001:3'b110;
+  {pcWrite, ifidWrite, stall_needed} <= (EX_M[0] && (EX_rt ==INS[25:21] || EX_rt == INS[20:16]))?3'b001:3'b110;
 end
 
 always @ ( posedge clk ) begin
@@ -73,6 +74,7 @@ always @ ( posedge clk ) begin
     BEQ: ifidFlush <= regs_equal;
     BNE: ifidFlush <= ~regs_equal;
     default: ifidFlush <= 0;
+  endcase
 
 end
 
