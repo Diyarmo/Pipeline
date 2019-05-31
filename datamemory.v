@@ -9,9 +9,19 @@ module DATA_MEMORY(
 
     always @(negedge clk) if(MemRead) Out <= mem[Address];
     integer i;
-    always @(posedge clk, posedge rst) begin
-        if(rst) for(i=0; i<10240; i=i+1) mem[i] <= 32'b0;
-        else if(MemWrite) mem[Address] <= WriteVal;
+    initial begin
+      for(i=0; i<10240; i=i+1) mem[i] = 32'b0;
+      mem[900] = 1000;
+      mem[901] = 1004;
+      mem[902] = 1;
+      mem[1000] = 5;
+      mem[1001] = 4;
+      mem[1002] = 6;
+      mem[1003] = 12;
+      mem[1004] = 1;
+    end
+    always @(posedge clk) begin
+        if(MemWrite) mem[Address] <= WriteVal;
     end
 
 endmodule
