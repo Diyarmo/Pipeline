@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 
 module CU(input clk, rst, output reg pcSrc, pcWrite, memRead, memWrite, ifidWrite, regDst,
-          output reg [2:0] ALUop, output reg ALUsrc, output reg [2:0]forwardA, [2:0]forwardB,
+          output reg [2:0] ALUop, output reg ALUsrc, output reg [1:0]forwardA, forwardB,
           output reg regWrite, stall_needed, ifidFlush, memToReg, jORb,
           input regs_equal, input [31:0] INS,input [4:0] EX_rs, EX_rt, MEM_writeReg, WB_writeReg, input [1:0] MEM_W, WB_W, EX_M);
 

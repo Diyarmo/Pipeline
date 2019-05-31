@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 
 module DP(input clk, rst, pcSrc, pcWrite, memRead, memWrite, ifidWrite, regDst,
-          input [2:0] ALUop, input ALUsrc, input [2:0]forwardA, [2:0]forwardB,
+          input [2:0] ALUop, input ALUsrc, input [1:0]forwardA, forwardB,
           input regWrite, stall_needed, ifidFlush, memToReg, jORb,
           output regs_equal, output [31:0] ID_INS, output [4:0] EX_rs, EX_rt, MEM_writeReg, WB_writeReg,
           output [1:0] MEM_W, WB_W, EX_M);
