@@ -15,11 +15,9 @@ IF_ID ifid(clk, rst, ifidWrite, ifidFlush, INS_out, new_PC, ID_INS, ID_PC);
 wire [31:0] readData1, readData2, writeData, S_EXTEND_out_b, S_EXTEND_out_j, jbPC;
 REGFILE rf(clk, rst, ID_INS[25:21], ID_INS[20:16], WB_writeReg, writeData, WB_W[0], readData1, readData2);
 SIGN_EXTEND #(16)se1(ID_INS[15:0], S_EXTEND_out_b);
-assign brAdd = (S_EXTEND_out_b<<2) + ID_PC;
+assign brAdd = S_EXTEND_out_b + ID_PC;
 SIGN_EXTEND #(26)se2(ID_INS[25:0], S_EXTEND_out_j);
-wire  [31:0] shift_out_j;
-assign shift_out_j = S_EXTEND_out_j << 2;
-assign jumpAdd = {ID_PC[31:28], shift_out_j[27:0]};
+assign jumpAdd = {ID_PC[31:28], S_EXTEND_out_j[27:0]};
 assign jbPC = (jORb==1)?brAdd:(jORb==0)?jumpAdd:32'bz;
 assign PC_in =(pcSrc==1)?(new_PC):(pcSrc==0)?jbPC:32'bz;
 
